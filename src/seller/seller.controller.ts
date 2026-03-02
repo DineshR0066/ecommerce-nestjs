@@ -4,9 +4,12 @@ import{ Product } from 'src/schema/product.schema';
 import{ CreateProductDto, UpdateProductDto } from './seller.dto';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/auth.guard';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Role } from 'src/auth/roles.enum';
 
 @Controller('seller')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard,RolesGuard)
+@Roles(Role.Seller)
 export class SellerController {
     constructor(private sellerService : SellerService){}
 
