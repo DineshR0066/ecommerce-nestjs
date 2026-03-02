@@ -8,6 +8,7 @@ import { SellerModule } from './seller/seller.module';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { MailModule } from './mail/mail.module';
+import { UserModule } from './user/user.module';
 
 
 @Module({
@@ -20,7 +21,7 @@ import { MailModule } from './mail/mail.module';
         uri: configService.get<string>('MONGODB'),
       }),
     }),
-   ProductModule, SellerModule, ConfigModule, AdminModule,AuthModule, MailModule],
+   ProductModule, SellerModule, ConfigModule, AdminModule,AuthModule, MailModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })

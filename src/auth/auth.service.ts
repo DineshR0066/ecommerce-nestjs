@@ -19,9 +19,9 @@ export class AuthService {
         private mailService: MailService) {}
 
     async signUp(signupDto: CreateUserDto) {
-        const { username, email, password, role } = signupDto;
+        const { username, email, password } = signupDto;
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await this.userModel.create({username,email,password: hashedPassword,role});
+        const user = await this.userModel.create({username,email,password: hashedPassword,role:"user"});
         await user.save();
         await this.userModel.findOneAndUpdate({_id: user._id}, {$set:{user_id: user._id.toString()}});
         const { accessToken, refreshToken } = await this.getTokens(user.role, user.email);
