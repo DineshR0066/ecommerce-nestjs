@@ -4,10 +4,12 @@ import { ParseIntPipe } from '@nestjs/common';
 import { CreateSellerDto } from './admin.dto';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/auth.guard';
-
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Role } from 'src/auth/roles.enum';
 
 @Controller('admin')
 @UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
