@@ -9,7 +9,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { MailModule } from 'src/mail/mail.module';
-
+import { RolesGuard } from './role.guard';
+import { JwtAuthGuard } from './auth.guard';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: user.name, schema: UserSchema }]),
@@ -28,6 +29,7 @@ import { MailModule } from 'src/mail/mail.module';
     }),MailModule
   ],
   providers: [AuthService, JwtService,JwtStrategy],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports: [AuthService, JwtModule, RolesGuard, JwtAuthGuard],
 })
 export class AuthModule {}
